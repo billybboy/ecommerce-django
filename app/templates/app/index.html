@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block title %}
+Welcome
+{% endblock %}
+
+{% block content %}
+    <div class="flex">
+    {% if products %}
+    {% for product in products %}
+        <div class="product w-1/4 bg-gray-200">{{ product.title }}</div>
+    {% endfor %}
+    {% else %}
+        <h1>There are no products currently.</h1>
+    {% endif %}
+    </div>
+{% endblock %}
