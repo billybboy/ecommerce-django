@@ -1,0 +1,13 @@
+{% extends 'app/base.html' %}
+
+{% block title %}
+My account
+{% endblock %}
+
+{% block content %}
+
+<h2>My account</h2>
+
+
+<a href="{% url 'userprofile:logout' %}" class="mt-6 inline-block py-4 px-6 bg-red-500 text-white">Log out</a>
+{% endblock %}
