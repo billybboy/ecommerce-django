@@ -16,6 +16,13 @@
                 <a href="{% url 'app:index' %}" class="text-white">Shop</a>
             </div>
 
+            <div class="search">
+                <form method="get" action="/search/">
+                    <input type="search" name="query" placeholder="Search...">
+                    <button>Go</button>
+                </form>
+            </div>
+
             <div class="menu">
                 {% menu %}
 
