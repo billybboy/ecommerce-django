@@ -20,8 +20,12 @@
 
     {% if product.description %}
         <p class="mt-4 mb-6">
-            {{ product.description }}
+            Description: {{ product.description }}
         </p>
     {% endif %}
-    <p>{{ product.price }}</p>
+    <p>Price: ${{ product.price }}</p>
+
+    {% if product.user == request.user %}
+        <a href="{% url 'userprofile:edit_product' product.id %}" class="mt-4 inline-block ">Edit</button>
+    {% endif %}
 {% endblock %}

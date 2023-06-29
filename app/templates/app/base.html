@@ -27,7 +27,8 @@
                 {% menu %}
 
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'userprofile:myaccount' %}" class="text-white mx-3">My account</a>
+                    <a href="{% url 'userprofile:myaccount' %}" class="text-white mx-3">My Account</a>
+                    <a href="{% url 'userprofile:mystore' %}" class="text-white mx-3">My Store</a>
                 {% endif %}
             </div>
         </nav>

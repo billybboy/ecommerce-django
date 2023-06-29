@@ -26,3 +26,4 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = {'email', 'name', 'password1', 'password2'}
         ordering = ['password1', 'password2', 'email', 'name']
+
