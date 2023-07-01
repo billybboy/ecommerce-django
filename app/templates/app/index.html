@@ -4,7 +4,18 @@
 Welcome
 {% endblock %}
 
+
 {% block content %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="mb-4 px-8 py-4 bg-teal-200 text-teal-8000">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
     <div class="flex flex-wrap">
     {% if products %}
     {% for product in products %}

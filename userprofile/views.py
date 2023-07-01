@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -41,6 +42,8 @@ def add_product(request):
             product.slug = slug
             product.save()
 
+            messages.success(request, 'Product created successfully.')
+
             return redirect('userprofile:mystore')
 
     else:
@@ -55,7 +58,20 @@ def add_product(request):
 def edit_product(request, pk):
     product = Product.objects.filter(user=request.user).get(pk=pk)
 
-    form = ProductForm(instance=product)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, 'Product updated.')
+
+            return redirect('userprofile:mystore')
+
+
+
+    else:
+        form = ProductForm(instance=product)
 
     return render(request, 'userprofile/add_product.html', {
         'title': 'Edit Product',
@@ -72,6 +88,8 @@ def signup(request):
             login(request, user)
 
             userprofile = UserProfile.objects.create(user=user)
+
+            messages.success(request, 'You have signup and logged in successfully.')
 
             return redirect('app:index')
     else:
