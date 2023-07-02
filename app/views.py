@@ -2,7 +2,7 @@ from django.shortcuts import render
 from category.models import Product
 
 def index(request):
-    products = Product.objects.all()[0:10]
+    products = Product.objects.filter(status=Product.ACTIVE)[0:10]
     return render(request, 'app/index.html', {
         'products': products
     })

@@ -15,14 +15,19 @@ from category.models import Product
 
 def vendor_detail(request, pk):
     user = User.objects.get(pk=pk)
+    products = user.products.filter(status=Product.ACTIVE)
 
     return render(request, 'userprofile/vendor_detail.html', {
-        'user': user
+        'user': user,
+        'products': products
     })
 
 @login_required
 def mystore(request):
-    return render(request, 'userprofile/mystore.html')
+    products = request.user.products.filter(status=Product.ACTIVE)
+    return render(request, 'userprofile/mystore.html', {
+        'products': products
+    })
 
 @login_required
 def myaccount(request):
@@ -49,7 +54,7 @@ def add_product(request):
     else:
         form = ProductForm()
 
-    return render(request, 'userprofile/add_product.html', {
+    return render(request, 'userprofile/product_form.html', {
         'title': 'Add Product',
         'form': form
     })
@@ -73,10 +78,21 @@ def edit_product(request, pk):
     else:
         form = ProductForm(instance=product)
 
-    return render(request, 'userprofile/add_product.html', {
+    return render(request, 'userprofile/product_form.html', {
         'title': 'Edit Product',
-        'form': form
+        'form': form,
+        'product': product
     })
+
+@login_required
+def delete_product(request, pk):
+    product = Product.objects.filter(user=request.user).get(pk=pk)
+    product.status = Product.DELETED
+    product.save()
+
+    messages.success(request, 'Product deleted.')
+
+    return redirect('userprofile:mystore')
 
 def signup(request):
     if request.method == 'POST':

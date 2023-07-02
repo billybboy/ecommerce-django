@@ -5,19 +5,5 @@
 {% endblock %}
 
 {% block content %}
-    <div class="flex flex-wrap">
-        {% for product in products %}
-        <div class="product w-1/4 p-4 mx-2 bg-gray-200">
-            {% if product.image %}
-                <div class="image mb-2">
-                    <img src="{{ product.image.url }}" alt="Image of {{ product.title }}">
-                </div>
-            {% endif %}
-            <a href="{% url 'category:product_detail' product.category.slug product.slug %}"
-            <h2 class="text-xl">{{ product.title }}</h2>
-            <p class="text-sm text-gray-500">${{ product.get_display_price }}</p>
-            </a>
-        </div>
-        {% endfor %}
-    </div>
+    {% include 'category/partials/products.html' %}
 {% endblock %}
