@@ -26,6 +26,10 @@
     <p>Price: ${{ product.price }}</p>
 
     {% if product.user == request.user %}
-        <a href="{% url 'userprofile:edit_product' product.id %}" class="mt-4 inline-block ">Edit</button>
+        <a href="{% url 'userprofile:edit_product' product.id %}" class="mt-4 px-8 py-4 bg-teal-500 text-white inline-block ">Edit</a>
+    {% else %}
+    <a href="{% url 'category:add_to_cart' product.id %}" class="mt-4 px-8 py-4 bg-teal-500 text-white inline-block">Add to Cart</a>
     {% endif %}
+
+
 {% endblock %}
