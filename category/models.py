@@ -76,3 +76,26 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class Order(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    zipcode = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    total_cost = models.IntegerField(default=0)
+    is_paid = models.BooleanField(default=False)
+    merchant_id = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(app.User, related_name='order', on_delete=models.SET_NULL, null=True)
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='items', on_delete=models.CASCADE)
+    price = models.IntegerField()
+    quantity = models.IntegerField(default=1)
+
+    def get_total_price(self):
+        return self.price
