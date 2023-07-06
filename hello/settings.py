@@ -60,6 +60,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'hello.urls'
 
+STRIPE_PUB_KEY = 'pk_test_51NQpPcIGBNgmUmdDHVPAQziMWx8ms1sacDtlLhGaeqWwP7XvZ0NmLFIbbJUvqaixTF66lVt8TG0z4VZFmc69cmbc00mlhXEJr4'
+STRIPE_SECRET_KEY = 'sk_test_51NQpPcIGBNgmUmdDjuzGIUUh4JlOKJP76bq1f8upBDki6JSlBGNPuJcIuNbJjYKA4jJe7l8qvIvMDTwiwSM1l7ZG003aQH7yCX'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
